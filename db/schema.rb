@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_151817) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_145641) do
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "customer_external_code"
@@ -29,16 +29,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_151817) do
 
   create_table "time_entries", force: :cascade do |t|
     t.string "entry_text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "project_id", null: false
+    t.string "project_external_code"
     t.boolean "last_in_block"
     t.boolean "not_in_export"
     t.boolean "sticky"
     t.integer "time_delta"
     t.integer "extra_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "projects", "customers"
-  add_foreign_key "time_entries", "projects"
 end

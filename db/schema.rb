@@ -10,11 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_144202) do
-  create_table "time_entries", force: :cascade do |t|
-    t.string "entry_text"
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_150323) do
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "customer_external_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "project_external_code"
+    t.integer "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_projects_on_customer_id"
+  end
+
+  create_table "time_entries", force: :cascade do |t|
+    t.string "entry_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "project_id", null: false
+    t.boolean "last_in_block"
+    t.boolean "not_in_export"
+    t.boolean "sticky"
+    t.integer "time_delta"
+    t.integer "extra_time"
+    t.index ["project_id"], name: "index_time_entries_on_project_id"
+  end
+
+  add_foreign_key "projects", "customers"
+  add_foreign_key "time_entries", "projects"
 end

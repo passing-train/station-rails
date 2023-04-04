@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-      resources :time_entries, only: [:index, :show, :create, :destroy]
+      resources :time_entries, only: [:index, :update, :show, :create, :destroy] do
+        get 'suggest', on: :collection
+      end
     end
   end
 end

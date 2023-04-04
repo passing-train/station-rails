@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_150323) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_151817) do
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "customer_external_code"
@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_150323) do
     t.boolean "sticky"
     t.integer "time_delta"
     t.integer "extra_time"
-    t.index ["project_id"], name: "index_time_entries_on_project_id"
   end
 
   add_foreign_key "projects", "customers"
